@@ -18,5 +18,5 @@ variable "service_name" {
 variable "image_url" {
   description = "The container image URL"
   type        = string
-  default     = "gcr.io/PROJECT_ID/mobilenet-classifier:latest"
+  default     = "asia-south1-docker.pkg.dev/PROJECT_ID/mobilenet-classifier/mobilenet-classifier:latest"
 }

@@ -56,7 +56,7 @@ jobs:
             -var="project_id=$PROJECT_ID" \
             -var="region=$REGION" \
             -var="service_name=$SERVICE" \
-            -var="image_url=gcr.io/$PROJECT_ID/$SERVICE:$GITHUB_SHA"
+            -var="image_url=asia-south1-docker.pkg.dev/$PROJECT_ID/mobilenet-classifier/$SERVICE:$GITHUB_SHA"
         working-directory: ./terraform
 
       - name: Terraform Apply
