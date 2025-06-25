@@ -50,6 +50,11 @@ jobs:
         run: terraform init
         working-directory: ./terraform
 
+      - name: Terraform Import Existing Cloud Run Service
+        run: |
+          terraform import google_cloud_run_service.mobilenet_classifier projects/$PROJECT_ID/locations/$REGION/services/$SERVICE || true
+        working-directory: ./terraform
+
       - name: Terraform Plan
         run: |
           terraform plan \
