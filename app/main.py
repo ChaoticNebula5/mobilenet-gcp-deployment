@@ -24,7 +24,7 @@ transform = None
 class_names = None
 
 def load_imagenet_classes():
-    """Load all 1000 ImageNet class names"""
+    """Load ImageNet class names"""
     return [
         "tench", "goldfish", "great_white_shark", "tiger_shark", "hammerhead_shark",
         "electric_ray", "stingray", "cock", "hen", "ostrich", "brambling",
