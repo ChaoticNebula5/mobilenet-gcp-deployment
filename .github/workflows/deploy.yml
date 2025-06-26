@@ -62,9 +62,13 @@ jobs:
       - name: Terraform Import
         env:
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
+          TF_VAR_region: asia-south1
+          TF_VAR_service_name: mobilenet-classifier
+          TF_VAR_image_url: asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mobilenet-classifier/mobilenet-classifier:${{ github.sha }}
         run: |
           terraform import google_cloud_run_service.mobilenet_classifier "projects/${{ secrets.GCP_PROJECT_ID }}/locations/asia-south1/services/mobilenet-classifier" || true
         working-directory: ./terraform
+
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
