@@ -59,7 +59,9 @@ jobs:
             -var="image_url=asia-south1-docker.pkg.dev/$PROJECT_ID/mobilenet-classifier/$SERVICE:$GITHUB_SHA"
         working-directory: ./terraform
 
-      - name: Terraform Import (optional, safe to fail if already imported)
+      - name: Terraform Import
+        env:
+          TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
         run: |
           terraform import google_cloud_run_service.mobilenet_classifier "projects/${{ secrets.GCP_PROJECT_ID }}/locations/asia-south1/services/mobilenet-classifier" || true
         working-directory: ./terraform
