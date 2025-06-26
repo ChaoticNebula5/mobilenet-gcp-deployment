@@ -66,9 +66,13 @@ jobs:
           TF_VAR_service_name: mobilenet-classifier
           TF_VAR_image_url: asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mobilenet-classifier/mobilenet-classifier:${{ github.sha }}
         run: |
-          terraform import google_cloud_run_service.mobilenet_classifier "projects/${{ secrets.GCP_PROJECT_ID }}/locations/asia-south1/services/mobilenet-classifier" || true
+          if gcloud run services describe mobilenet-classifier --region=asia-south1 --project=${{ secrets.GCP_PROJECT_ID }} > /dev/null 2>&1; then
+            echo "Cloud Run service exists — importing into Terraform"
+            terraform import google_cloud_run_service.mobilenet_classifier "projects/${{ secrets.GCP_PROJECT_ID }}/locations/asia-south1/services/mobilenet-classifier"
+          else
+            echo "Cloud Run service does not exist — skipping import"
+          fi
         working-directory: ./terraform
-
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
