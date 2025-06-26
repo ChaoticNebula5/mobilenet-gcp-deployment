@@ -59,7 +59,11 @@ jobs:
             -var="image_url=asia-south1-docker.pkg.dev/$PROJECT_ID/mobilenet-classifier/$SERVICE:$GITHUB_SHA"
         working-directory: ./terraform
 
-      - name: Terraform Import
+      - name: Terraform Init (again before import)
+        run: terraform init
+        working-directory: ./terraform
+
+      - name: Conditionally Import if Service Exists
         env:
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
           TF_VAR_region: asia-south1
