@@ -59,7 +59,7 @@ jobs:
             -var="image_url=asia-south1-docker.pkg.dev/$PROJECT_ID/mobilenet-classifier/$SERVICE:$GITHUB_SHA"
         working-directory: ./terraform
 
-      - name: Terraform Init (again before import)
+      - name: Terraform Init
         run: terraform init
         working-directory: ./terraform
 
